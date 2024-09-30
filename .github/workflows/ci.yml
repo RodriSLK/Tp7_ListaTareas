@@ -32,3 +32,6 @@ jobs:
 
       - name: Run tests
         run: npm test # Ejecuta tus pruebas
+
+      - name: Build the project
+        run: npm run build

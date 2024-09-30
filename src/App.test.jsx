@@ -12,7 +12,7 @@ test('adding a new task adds it to the list', () => {
   const buttonElement = screen.getByText(/Añadir/i);
 
   // Simulamos escribir en el campo de entrada
-  fireEvent.change(inputElement, { target: { value: 'Nueva Tarea' } });
+  fireEvent.change(inputElement, { target: { value: 'Nueva Tarea 1' } });
 
   // Simulamos hacer clic en el botón "Añadir"
   fireEvent.click(buttonElement);

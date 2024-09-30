@@ -2,7 +2,6 @@ import { useState } from 'react';
 import './App.css';
 import React from 'react';
 
-
 function App() {
   const [tasks, setTasks] = useState([]);
   const [taskInput, setTaskInput] = useState('');
@@ -35,7 +34,10 @@ function App() {
         {tasks.map((task, index) => (
           <li key={index}>
             {task}
-            <button className="delete-btn" onClick={() => handleDeleteTask(index)}>
+            <button
+              className="delete-btn"
+              onClick={() => handleDeleteTask(index)}
+            >
               Eliminar
             </button>
           </li>
@@ -46,4 +48,3 @@ function App() {
 }
 
 export default App;
-

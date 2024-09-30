@@ -3,10 +3,10 @@ name: CI
 on:
   push:
     branches:
-      - develop  # Ejecuta el flujo de trabajo cuando se hace push a la rama develop
+      - develop # Ejecuta el flujo de trabajo cuando se hace push a la rama develop
   pull_request:
     branches:
-      - develop  # Ejecuta el flujo de trabajo para PRs dirigidos a develop
+      - develop # Ejecuta el flujo de trabajo para PRs dirigidos a develop
 
 jobs:
   test:
@@ -19,13 +19,16 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '16'  # Especifica la versión de Node.js que deseas usar
+          node-version: '16' # Especifica la versión de Node.js que deseas usar
 
       - name: Install dependencies
-        run: npm install  # Instala las dependencias del proyecto
-        
+        run: npm install # Instala las dependencias del proyecto
+
       - name: Run ESLint
         run: npm run lint
 
+      - name: Run Prettier
+        run: npx prettier --check .
+
       - name: Run tests
-        run: npm test  # Ejecuta tus pruebas
+        run: npm test # Ejecuta tus pruebas

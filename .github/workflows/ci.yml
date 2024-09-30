@@ -25,7 +25,7 @@ jobs:
         run: npm install  # Instala las dependencias del proyecto
 
       - name: Run ESLint
-        run: npm run lint  # Ejecuta el comando de lint que ya definiste en package.json  
+        run: npx eslint .  # Ejecuta el comando de lint que ya definiste en package.json  
 
       - name: Run tests
         run: npm test  # Ejecuta tus pruebas

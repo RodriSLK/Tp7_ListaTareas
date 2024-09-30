@@ -1,6 +1,8 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import App from './App';
 import '@testing-library/jest-dom';
+import React from 'react';
+
 
 test('adding a new task adds it to the list', () => {
   // Renderizamos el componente

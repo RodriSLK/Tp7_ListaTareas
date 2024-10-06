@@ -9,29 +9,80 @@ on:
       - develop # Ejecuta el flujo de trabajo para PRs dirigidos a develop
 
 jobs:
-  test:
+  # Para el formato del código
+  format:
+    name: Formato de código
     runs-on: ubuntu-latest
-
     steps:
-      - name: Check out code
+      - name: Checkout code
         uses: actions/checkout@v2
 
       - name: Set up Node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
-          node-version: '16' # Especifica la versión de Node.js que deseas usar
+          node-version: '16'
 
       - name: Install dependencies
-        run: npm install # Instala las dependencias del proyecto
+        run: npm install
 
-      - name: Run ESLint
+      - name: Run prettier
+        run: npx prettier --check
+
+  # Para las pruebas unitarias
+  test:
+    name: Pruebas unitarias
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run unit tests
+        run: npm run test
+
+  # Garantiza que el código cumple con buenas prácticas
+  lint:
+    name: Lint Code
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run linter
         run: npm run lint
 
-      - name: Run Prettier
-        run: npx prettier --check .
+  # Parte donde se simula la build del proyecto
+  build:
+    name: Build proyecto
+    runs-on: ubuntu-latest
+    # Esta parte depende de las anteriores
+    needs: [format, test, lint]
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-      - name: Run tests
-        run: npm test # Ejecuta tus pruebas
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
 
-      - name: Build the project
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build app
         run: npm run build
